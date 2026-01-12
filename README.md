@@ -19,9 +19,13 @@ La extensión permite al usuario cambiar la fuente tipográfica de las páginas 
 -Gravedad: Alta
 
 📂 Componentes Afectados
+
 popup.js
+
 -El valor seleccionado por el usuario se guarda sin validación ni sanitización.
+
 content.js
+
 -El valor almacenado se inserta directamente en el DOM en cada carga de página.
 
 
